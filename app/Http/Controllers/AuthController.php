@@ -16,7 +16,11 @@ class AuthController extends Controller
             if (!$token = auth()->attempt($req->all())) {
                 throw new Exception('Unauthorized');
             }
-            return $this->buildResponse(200, 'Success', compact('token'));
+            $user = User::where('email', $req->input('email'))->first();
+            if (!$user) {
+                throw new \Exception("Failed login", 1);
+            }
+            return $this->buildResponse(200, 'Success', compact('token', 'user'));
         } catch (\Exception $e) {
             return $this->buildResponse(500, 'Internal Server Error', ['error' => $e->getMessage()]);
         }
