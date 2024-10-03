@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,10 @@ Route::prefix('v1')->group(function () {
             Route::post('/store', [UserController::class, 'createUser']);
             Route::post('/update', [UserController::class, 'updateUser']);
             Route::post('/delete', [UserController::class, 'deleteUser']);
+        });
+        Route::prefix('transactions')->group(function () {
+            Route::get('/', [TransactionController::class, 'getTransactions']);
+            Route::post('/new', [TransactionController::class, 'newTransaction']);
         });
     });
 });

@@ -1,4 +1,4 @@
-# BTN Services
+# Inventory Stock Services
 
 This is the back-end application for the BTN project. It's built with Laravel 11 and PHP 8.1.
 
@@ -37,18 +37,22 @@ This is the back-end application for the BTN project. It's built with Laravel 11
 
     php artisan migrate
 
+    php artisan db:seed
+
     php artisan serve
     ```
 
 1. The app will be running at `http://localhost:8000`.
 
-## Creadentials
+## Resources
 
 -   [Postman Collection API](https://rudi-blahok.postman.co/workspace/My-Public-Workspace~6d5b6275-23ee-46ff-8d31-74761ac7484c/collection/16471792-9f507520-970c-4b30-8cea-096114df4523?action=share&creator=16471792)
 
-## Creadentials
+## Credentials
 
-User:
-
--   email: bimo@example.com
--   pass: password
+-   Admin:
+    email: admin@example.com
+    pass: password
+-   User:
+    email: user@example.com
+    pass: password

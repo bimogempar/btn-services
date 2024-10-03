@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class RequestCreateUser extends FormRequest
+class RequestCreateTransaction extends FormRequest
 {
     use BuildResponse;
 
@@ -19,10 +19,9 @@ class RequestCreateUser extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required',
-            'password' => 'required',
-            'role' => 'required'
+            'product_id' => 'required',
+            'quantity' => 'required',
+            'type' => 'required|in:stock_in,stock_out',
         ];
     }
 
