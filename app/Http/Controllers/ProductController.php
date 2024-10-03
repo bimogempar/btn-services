@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function getProducts()
     {
         try {
-            $products = Product::get();
+            $products = Product::with('categoryProduct')->get();
             return $this->buildResponse(200, "Success", compact('products'));
         } catch (\Exception $e) {
             return $this->buildResponse(500, "Internal Server Error", ['error' => $e->getMessage()]);
@@ -39,8 +39,8 @@ class ProductController extends Controller
             }
             $product->update([
                 'name' => $req->input('name'),
-                'description' => $req->input('description'),
-                'stock' => $req->input('stock'),
+                'description' => $req->input('description') ?? $product->description,
+                'stock' => $req->input('stock') ?? $product->stock,
             ]);
             return $this->buildResponse(200, "Success", compact('product'));
         } catch (\Exception $e) {

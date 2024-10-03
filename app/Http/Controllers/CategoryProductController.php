@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryProduct;
 use Illuminate\Http\Request;
 
 class CategoryProductController extends Controller
@@ -9,6 +10,7 @@ class CategoryProductController extends Controller
     public function getCategoryProducts()
     {
         try {
+            $categories = CategoryProduct::with('product')->get();
             return $this->buildResponse(200, "Success", compact('categories'));
         } catch (\Exception $e) {
             return $this->buildResponse(500, "Internal Server Error", ['error' => $e->getMessage()]);
