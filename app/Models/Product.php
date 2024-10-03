@@ -15,4 +15,9 @@ class Product extends Model
     {
         return $this->belongsTo(CategoryProduct::class, 'category_id', 'id');
     }
+
+    public function transactions()
+    {
+        return $this->belongsToMany(Transaction::class, 'products_transactions')->withPivot('quantity');
+    }
 }

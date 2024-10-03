@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
+use App\Models\Transaction;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,35 +15,28 @@ class TransactionSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('transactions')->insert([
-            [
-                'product_id' => 1, // Assuming this product exists
-                'type' => 'stock_out',
-                'quantity' => 50,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'product_id' => 1, // Assuming this product exists
-                'type' => 'stock_out',
-                'quantity' => 20,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'product_id' => 2, // Assuming this product exists
-                'type' => 'stock_out',
-                'quantity' => 30,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'product_id' => 2, // Assuming this product exists
-                'type' => 'stock_out',
-                'quantity' => 10,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+        // stock_out
+        $trxStockOut = Transaction::create([
+            'type' => 'stock_out'
         ]);
+
+        $products = Product::limit(3)->get();
+        foreach ($products as $p) {
+            $trxStockOut->products()->attach($p->id, ['quantity' => 2]);
+            $p->update([
+                'stock' => $p->stock - 2
+            ]);
+        }
+
+        // stock_in
+        $trxStockIn = Transaction::create([
+            'type' => 'stock_in'
+        ]);
+        foreach ($products as $p) {
+            $trxStockIn->products()->attach($p->id, ['quantity' => 2]);
+            $p->update([
+                'stock' => $p->stock + 2
+            ]);
+        }
     }
 }

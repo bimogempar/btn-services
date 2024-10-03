@@ -19,8 +19,9 @@ class RequestCreateTransaction extends FormRequest
     public function rules()
     {
         return [
-            'product_id' => 'required',
-            'quantity' => 'required',
+            'products' => 'required|array',
+            'products.*.product_id' => 'required|exists:products,id',
+            'products.*.quantity' => 'required|integer|min:1',
             'type' => 'required|in:stock_in,stock_out',
         ];
     }

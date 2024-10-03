@@ -11,8 +11,8 @@ class Transaction extends Model
 
     protected $guarded = [];
 
-    public function product()
+    public function products()
     {
-        return $this->belongsTo(Product::class, 'product_id', 'id');
+        return $this->belongsToMany(Product::class, 'products_transactions')->withPivot('quantity');
     }
 }
