@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class RequestStoreProduct extends FormRequest
+class RequestCreateUser extends FormRequest
 {
     use BuildResponse;
 
@@ -20,10 +20,9 @@ class RequestStoreProduct extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'category_id' => 'required',
-            'description' => '',
-            'image' => '',
-            'stock' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'role' => ''
         ];
     }
 

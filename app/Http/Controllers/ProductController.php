@@ -23,7 +23,8 @@ class ProductController extends Controller
     public function storeProduct(RequestStoreProduct $req)
     {
         try {
-            $products = Product::create($req->all());
+            $body = $req->all();
+            $products = Product::create($body);
             return $this->buildResponse(200, "Success", compact('products'));
         } catch (\Exception $e) {
             return $this->buildResponse(500, "Internal Server Error", ['error' => $e->getMessage()]);
@@ -33,10 +34,7 @@ class ProductController extends Controller
     public function updateProduct(RequestUpdateProduct $req)
     {
         try {
-            $product = Product::find($req->input('id'))->first();
-            if (!$product) {
-                throw new \Exception('Not found');
-            }
+            $product = Product::where('id', $req->input('id'))->firstOrFail();
             $product->update([
                 'name' => $req->input('name'),
                 'description' => $req->input('description') ?? $product->description,
@@ -51,12 +49,9 @@ class ProductController extends Controller
     public function deleteProduct(Request $req)
     {
         try {
-            $product = Product::find($req->input('id'))->first();
-            if (!$product) {
-                throw new \Exception('Not found');
-            }
+            $product = Product::where('id', $req->input('id'))->firstOrFail();
             $product->delete();
-            return $this->buildResponse(200, "Success", compact('product'));
+            return $this->buildResponse(200, "Success", null);
         } catch (\Exception $e) {
             return $this->buildResponse(500, "Internal Server Error", ['error' => $e->getMessage()]);
         }
