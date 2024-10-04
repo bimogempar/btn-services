@@ -37,7 +37,7 @@ class UserController extends Controller
             $user->update([
                 'name' => $req->input('name', $user->name),
                 'email' => $req->input('email', $user->email),
-                'password' => Hash::make($req->input('password', $user->password)),
+                'password' => $req->filled('password') ? Hash::make($req->input('password')) : $user->password,
                 'role' => $req->input('role', $user->role),
             ]);
             return $this->buildResponse(200, "Success", compact('user'));

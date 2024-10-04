@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class RequestCreateUser extends FormRequest
+class RequestUpdateUser extends FormRequest
 {
     use BuildResponse;
 
@@ -21,7 +21,7 @@ class RequestCreateUser extends FormRequest
         return [
             'name' => 'required|string',
             'email' => 'required',
-            'password' => 'required',
+            'password' => '',
             'role' => 'required'
         ];
     }
