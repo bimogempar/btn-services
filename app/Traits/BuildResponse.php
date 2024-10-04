@@ -4,7 +4,7 @@ namespace App\Traits;
 
 trait BuildResponse
 {
-    public function buildResponse($statusCode, $message, $data = null)
+    public function buildResponse($statusCode, $message, $data = null, $httpStatus = 200)
     {
         $res = [
             'status_code' => $statusCode,
@@ -15,6 +15,6 @@ trait BuildResponse
             $res = array_merge($res, $data);
         }
 
-        return response()->json($res);
+        return response()->json($res, $httpStatus);
     }
 }
