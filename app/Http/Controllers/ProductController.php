@@ -24,8 +24,8 @@ class ProductController extends Controller
     {
         try {
             $body = $req->all();
-            $products = Product::create($body);
-            return $this->buildResponse(200, "Success", compact('products'));
+            $product = Product::create($body);
+            return $this->buildResponse(200, "Success", compact('product'));
         } catch (\Exception $e) {
             return $this->buildResponse(500, "Internal Server Error", ['error' => $e->getMessage()]);
         }
