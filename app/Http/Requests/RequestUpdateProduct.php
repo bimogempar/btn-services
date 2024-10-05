@@ -24,6 +24,7 @@ class RequestUpdateProduct extends FormRequest
             'description' => '',
             'image' => '',
             'stock' => '',
+            'category_id' => '',
         ];
     }
 

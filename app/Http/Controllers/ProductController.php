@@ -39,6 +39,7 @@ class ProductController extends Controller
                 'name' => $req->input('name'),
                 'description' => $req->input('description') ?? $product->description,
                 'stock' => $req->input('stock') ?? $product->stock,
+                'category_id' => $req->input('category_id') ?? $product->category_id,
             ]);
             return $this->buildResponse(200, "Success", compact('product'));
         } catch (\Exception $e) {
